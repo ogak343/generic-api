@@ -1,0 +1,11 @@
+version: '2.0'
+
+services:
+  db:
+    image: postgres:16
+    ports:
+      - "5430:5432"
+    environment:
+      POSTGRES_USER: generic
+      POSTGRES_DB: generic
+      POSTGRES_PASSWORD: generic

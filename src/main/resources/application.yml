@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: generic-rest-api
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5430/generic
+    driver-class-name: org.postgresql.Driver
+    username: generic
+    password: generic
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db-changelog.yaml

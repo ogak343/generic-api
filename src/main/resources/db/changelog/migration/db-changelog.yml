@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - logicalFilePath: no-path
+  - changeSet:
+      id: 2025-02-03.initial-structure
+      author: Og'abek
+      changes:
+        - sqlFile:
+            dbms: 'postgresql'
+            path: db/changelog/migration/initial-structure.sql
