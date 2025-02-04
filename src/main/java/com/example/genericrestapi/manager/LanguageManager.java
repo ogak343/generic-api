@@ -1,4 +1,4 @@
-package com.example.genericrestapi.service;
+package com.example.genericrestapi.manager;
 
 import com.example.genericrestapi.constants.ErrorCode;
 import com.example.genericrestapi.dto.language.CreateLanguage;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class LanguageService {
+public class LanguageManager {
 
     private final LanguageRepository repository;
     private final LanguageMapper mapper;
 
-    public LanguageService(LanguageRepository repository, LanguageMapper mapper) {
+    public LanguageManager(LanguageRepository repository, LanguageMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

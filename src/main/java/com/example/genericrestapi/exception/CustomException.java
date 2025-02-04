@@ -1,7 +1,9 @@
 package com.example.genericrestapi.exception;
 
 import com.example.genericrestapi.constants.ErrorCode;
+import lombok.Getter;
 
+@Getter
 public class CustomException extends RuntimeException {
     private final ErrorCode error;
 
@@ -9,7 +11,4 @@ public class CustomException extends RuntimeException {
         this.error = error;
     }
 
-    public ErrorCode getError() {
-        return error;
-    }
 }

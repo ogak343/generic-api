@@ -1,2 +1,9 @@
-package com.example.genericrestapi.dto.company;public record UpdateCompany() {
+package com.example.genericrestapi.dto.company;
+
+import java.util.Map;
+
+public record UpdateCompany(
+        String name,
+        Map<String, String> title
+) {
 }

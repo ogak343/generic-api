@@ -1,4 +1,4 @@
-package com.example.genericrestapi.service;
+package com.example.genericrestapi.manager;
 
 import com.example.genericrestapi.constants.ErrorCode;
 import com.example.genericrestapi.dto.category.CategoryResponse;
@@ -14,18 +14,18 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class CategoryService {
+public class CategoryManager {
     private final CategoryRepository repository;
     private final CategoryMapper mapper;
-    private final LanguageService languageService;
+    private final LanguageManager languageManager;
 
-    public CategoryService(CategoryRepository repository,
+    public CategoryManager(CategoryRepository repository,
                            CategoryMapper mapper,
-                           LanguageService languageService
+                           LanguageManager languageManager
     ) {
         this.repository = repository;
         this.mapper = mapper;
-        this.languageService = languageService;
+        this.languageManager = languageManager;
     }
 
     public CategoryResponse create(CreateCategory request) {
@@ -59,6 +59,6 @@ public class CategoryService {
 
     private void validateCategory(String name, Set<String> keys) {
         if (name != null && repository.existsByName(name)) throw new CustomException(ErrorCode.CATEGORY_EXISTS);
-        if (keys.isEmpty()) languageService.validateKeys(keys);
+        if (!keys.isEmpty()) languageManager.validateKeys(keys);
     }
 }

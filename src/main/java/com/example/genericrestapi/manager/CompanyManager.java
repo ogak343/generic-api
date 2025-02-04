@@ -1,4 +1,4 @@
-package com.example.genericrestapi.service;
+package com.example.genericrestapi.manager;
 
 import com.example.genericrestapi.constants.ErrorCode;
 import com.example.genericrestapi.dto.company.CompanyResponse;
@@ -14,26 +14,26 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class CompanyService {
+public class CompanyManager {
     private final CompanyRepository repository;
     private final CompanyMapper mapper;
-    private final LanguageService languageService;
-    private final CategoryService categoryService;
+    private final LanguageManager languageManager;
+    private final CategoryManager categoryManager;
 
-    public CompanyService(CompanyRepository repository,
+    public CompanyManager(CompanyRepository repository,
                           CompanyMapper mapper,
-                          LanguageService languageService,
-                          CategoryService categoryService
+                          LanguageManager languageManager,
+                          CategoryManager categoryManager
     ) {
         this.repository = repository;
         this.mapper = mapper;
-        this.languageService = languageService;
-        this.categoryService = categoryService;
+        this.languageManager = languageManager;
+        this.categoryManager = categoryManager;
     }
 
     public CompanyResponse create(CreateCompany request) {
         validateCompany(request.name(), request.title().keySet());
-        categoryService.validateExist(request.categoryId());
+        categoryManager.validateExist(request.categoryId());
         return mapper.toResponse(repository.save(mapper.toEntity(request)));
     }
 
@@ -60,6 +60,6 @@ public class CompanyService {
 
     private void validateCompany(String name, Set<String> keys) {
         if (name != null && repository.existsByName(name)) throw new CustomException(ErrorCode.COMPANY_EXISTS);
-        if (!keys.isEmpty()) languageService.validateKeys(keys);
+        if (!keys.isEmpty()) languageManager.validateKeys(keys);
     }
 }

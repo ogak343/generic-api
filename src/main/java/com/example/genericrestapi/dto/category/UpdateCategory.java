@@ -1,4 +1,9 @@
 package com.example.genericrestapi.dto.category;
 
-public record UpdateCategory() {
+import java.util.Map;
+
+public record UpdateCategory(
+        String name,
+        Map<String, String> title
+) {
 }
