@@ -11,6 +11,7 @@ import com.example.genericrestapi.repository.LanguageRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class LanguageService {
@@ -24,6 +25,7 @@ public class LanguageService {
     }
 
     public LanguageResponse create(CreateLanguage request) {
+        checkValidness(request.code());
         return mapper.toResponse(repository.save(mapper.toEntity(request)));
     }
 
@@ -41,8 +43,19 @@ public class LanguageService {
     }
 
     public LanguageResponse update(Long id, UpdateLanguage request) {
+        checkValidness(request.code());
+
         var entity = getLanguage(id);
         mapper.update(entity, request);
         return mapper.toResponse(repository.save(entity));
+    }
+
+    private void checkValidness(String code) {
+        if (repository.existsByCode(code)) throw new CustomException(ErrorCode.LANGUAGE_EXISTS);
+    }
+
+    public void validateKeys(Set<String> keys) {
+        if (keys == null || keys.isEmpty() || repository.countAllById(keys) != keys.size())
+            throw new CustomException(ErrorCode.INVALID_LANGUAGE_SPECIFIED);
     }
 }
