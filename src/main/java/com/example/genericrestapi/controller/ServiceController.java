@@ -42,7 +42,7 @@ public class ServiceController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ServiceResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateService request) {
+    public ResponseEntity<ServiceResponse> update(@PathVariable Long id, @RequestBody UpdateService request) {
 
         LOG.info("Update service: {}", request);
         return ResponseEntity.ok(manager.update(id, request));

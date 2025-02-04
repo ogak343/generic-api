@@ -5,6 +5,7 @@ import com.example.genericrestapi.dto.field.RequestFieldResponse;
 import com.example.genericrestapi.dto.field.UpdateRequestField;
 import com.example.genericrestapi.manager.RequestFieldManager;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class RequestFieldController {
     }
 
     @PostMapping
-    public ResponseEntity<RequestFieldResponse> create(@RequestBody CreateRequestField request) {
+    public ResponseEntity<RequestFieldResponse> create(@RequestBody @Valid CreateRequestField request) {
 
         LOG.info("Create request field: {}", request);
         return ResponseEntity.ok(manager.create(request));

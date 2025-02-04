@@ -42,7 +42,7 @@ public class LanguageController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<LanguageResponse> update(@PathVariable Long id, @RequestBody UpdateLanguage request) {
+    public ResponseEntity<LanguageResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateLanguage request) {
         LOG.info("Update language request: {}", request);
         return ResponseEntity.ok(facade.update(id, request));
     }
