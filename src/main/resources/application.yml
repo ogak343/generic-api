@@ -2,7 +2,7 @@ spring:
   application:
     name: generic-rest-api
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5430/generic
+    url: jdbc:postgresql://gra:5432/generic
     driver-class-name: org.postgresql.Driver
     username: generic
     password: generic
